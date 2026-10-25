@@ -4,7 +4,7 @@ import { Check, Sparkles, Lightbulb, Languages, BookOpen } from 'lucide-react';
 const STUDY_ITEMS = [
   { key: 'knowledge', label: 'Kiến thức mới', icon: Lightbulb, color: '#f59e0b' },
   { key: 'english', label: 'Học Tiếng Anh', icon: Languages, color: '#3b82f6' },
-  { key: 'reading', label: 'Đọc sách', icon: BookOpen, color: '#8b5cf6' },
+  { key: 'reading', label: 'Đọc sách', icon: BookOpen, color: '#10b981' },
 ];
 
 function DayCell({ 
@@ -95,15 +95,15 @@ function DayCell({
         </div>
       )}
 
-      {/* 3 Study Items with Clickable Checkboxes */}
-      <div className="cell-items-list">
+      {/* 3 Study Items with Fixed 3-Column Grid */}
+      <div className="cell-items-list" role="group" aria-label="Nội dung học tập">
         {STUDY_ITEMS.map((item) => {
           const isChecked = !!record[item.key];
           const IconComp = item.icon;
           return (
             <div 
               key={item.key} 
-              className="cell-item custom-checkbox"
+              className={`cell-item study-row ${isChecked ? 'is-checked' : ''}`}
               onClick={(e) => handleCheckboxClick(e, item.key)}
               role="checkbox"
               aria-checked={isChecked}
@@ -115,14 +115,17 @@ function DayCell({
                 }
               }}
               title={`${item.label}: ${isChecked ? 'Đã hoàn thành' : 'Chưa hoàn thành'}`}
+              aria-label={`${item.label}: ${isChecked ? 'Đã hoàn thành' : 'Chưa hoàn thành'}`}
             >
-              <span className={`checkbox-box ${isChecked ? 'is-checked pop-active' : ''}`}>
-                {isChecked && <Check size={13} strokeWidth={3} />}
-              </span>
-              <span className="item-icon">
-                <IconComp size={12} color={item.color} />
-              </span>
-              <span className="item-label">{item.label}</span>
+              <div className="row-col-check">
+                <span className={`checkbox-box ${isChecked ? 'is-checked' : ''}`}>
+                  {isChecked && <Check size={12} strokeWidth={3} />}
+                </span>
+              </div>
+              <div className={`row-col-icon icon-${item.key}`} aria-hidden="true">
+                <IconComp size={16} strokeWidth={2.2} />
+              </div>
+              <span className="item-label row-col-label">{item.label}</span>
             </div>
           );
         })}

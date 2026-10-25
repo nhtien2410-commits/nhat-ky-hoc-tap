@@ -238,7 +238,6 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .custom-checkbox {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
   position: relative;
   cursor: pointer;
   user-select: none;
