@@ -1,0 +1,308 @@
+/* ==========================================================================
+   DAILY STUDY TRACKER - DESIGN SYSTEM & THEME
+   Modern Minimal Clean Aesthetic with Dark/Light Modes & Glassmorphism
+   ========================================================================== */
+
+:root {
+  /* Fonts */
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Transitions */
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-fast: 150ms var(--ease-smooth);
+  --transition-normal: 250ms var(--ease-smooth);
+  --transition-spring: 350ms var(--ease-spring);
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+}
+
+/* Light Theme (Default) */
+[data-theme='light'], :root:not([data-theme='dark']) {
+  --bg-app: #f8fafc;
+  --bg-gradient: radial-gradient(at 0% 0%, #f0fdf4 0px, transparent 50%),
+                      radial-gradient(at 100% 0%, #eff6ff 0px, transparent 50%),
+                      radial-gradient(at 50% 100%, #faf5ff 0px, transparent 50%);
+  --bg-surface: #ffffff;
+  --bg-surface-elevated: #ffffff;
+  --bg-surface-translucent: rgba(255, 255, 255, 0.78);
+  --bg-input: #f1f5f9;
+  
+  --border-main: #e2e8f0;
+  --border-light: #edf2f7;
+  --border-focus: #10b981;
+
+  --text-main: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  --text-inverse: #ffffff;
+
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 25px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+  --shadow-glow: 0 0 20px rgba(16, 185, 129, 0.25);
+
+  /* Study & Task States */
+  --cell-bg-empty: rgba(255, 255, 255, 0.7);
+  --cell-bg-weekend: rgba(241, 245, 249, 0.7);
+  --cell-bg-hover: rgba(248, 250, 252, 0.95);
+  --cell-bg-partial: #ecfdf5;
+  --cell-border-partial: #a7f3d0;
+  --cell-bg-completed: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  --cell-border-completed: #059669;
+  --cell-text-completed: #ffffff;
+
+  /* Accents */
+  --primary: #10b981;
+  --primary-hover: #059669;
+  --primary-subtle: #d1fae5;
+  --primary-text: #065f46;
+
+  --accent-blue: #3b82f6;
+  --accent-purple: #8b5cf6;
+  --accent-amber: #f59e0b;
+  --accent-rose: #f43f5e;
+  /* Form input & border variables */
+  --surface-input: #ffffff;
+  --border: #e2e8f0;
+  --border-strong: #94a3b8;
+  --text: #0f172a;
+  --emerald: #10b981;
+}
+
+/* Dark Theme */
+[data-theme='dark'] {
+  --bg-app: #090d16;
+  --bg-gradient: radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.12) 0px, transparent 50%),
+                      radial-gradient(at 100% 0%, rgba(59, 130, 246, 0.10) 0px, transparent 50%),
+                      radial-gradient(at 50% 100%, rgba(139, 92, 246, 0.08) 0px, transparent 50%);
+  --bg-surface: #111827;
+  --bg-surface-elevated: #1e293b;
+  --bg-surface-translucent: rgba(17, 24, 39, 0.85);
+  --bg-input: #1e293b;
+
+  --border-main: #1f2937;
+  --border-light: #283548;
+  --border-focus: #34d399;
+
+  --text-main: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #64748b;
+  --text-inverse: #090d16;
+
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 25px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -4px rgba(0, 0, 0, 0.3);
+  --shadow-glow: 0 0 25px rgba(52, 211, 153, 0.3);
+
+  /* Study & Task States in Dark Mode */
+  --cell-bg-empty: rgba(19, 28, 46, 0.7);
+  --cell-bg-weekend: rgba(15, 23, 42, 0.75);
+  --cell-bg-hover: rgba(27, 38, 59, 0.95);
+  --cell-bg-partial: rgba(16, 185, 129, 0.15);
+  --cell-border-partial: rgba(52, 211, 153, 0.35);
+  --cell-bg-completed: linear-gradient(135deg, #059669 0%, #047857 100%);
+  --cell-border-completed: #10b981;
+  --cell-text-completed: #ffffff;
+
+  /* Accents */
+  --primary: #10b981;
+  --primary-hover: #34d399;
+  --primary-subtle: rgba(16, 185, 129, 0.2);
+  --primary-text: #a7f3d0;
+
+  --accent-blue: #60a5fa;
+  --accent-purple: #a78bfa;
+  --accent-amber: #fbbf24;
+  --accent-rose: #fb7185;
+
+  /* Form input & border variables */
+  --surface-input: rgba(30, 41, 59, 0.7);
+  --border: #334155;
+  --border-strong: #64748b;
+  --text: #f8fafc;
+  --emerald: #10b981;
+}
+
+/* Global Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  min-height: 100%;
+  font-family: var(--font-sans);
+  background-color: var(--bg-app);
+  color: var(--text-main);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-image: var(--bg-gradient);
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+button, input, textarea, select {
+  font-family: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  outline: none;
+}
+
+button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+/* App Container */
+.app-container {
+  position: relative;
+  z-index: 10;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Glassmorphism Panel Utility (Frosted Glass Depth) */
+.glass-panel {
+  background: var(--bg-surface-translucent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05), 0 1px 3px 0 rgba(0, 0, 0, 0.02);
+}
+
+[data-theme='dark'] .glass-panel {
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5), 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* Subtle bounce/press animation */
+.pressable {
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.pressable:active {
+  transform: scale(0.97);
+}
+
+/* Micro-animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes checkmarkPop {
+  0% { transform: scale(0.7); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 15px rgba(16, 185, 129, 0.2); }
+  50% { box-shadow: 0 0 25px rgba(16, 185, 129, 0.45); }
+}
+
+/* Custom Checkbox Design */
+.custom-checkbox {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.custom-checkbox input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.checkbox-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 6px;
+  border: 1.5px solid var(--border-main);
+  background-color: var(--bg-surface);
+  transition: all var(--transition-fast);
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.custom-checkbox input[type="checkbox"]:checked + .checkbox-box,
+.checkbox-box.is-checked {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  animation: checkmarkPop 0.25s var(--ease-spring);
+}
+
+/* Completed day styling overrides */
+.completed-day .checkbox-box,
+.day-cell.state-completed .checkbox-box {
+  border-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.completed-day .custom-checkbox input[type="checkbox"]:checked + .checkbox-box,
+.day-cell.state-completed .checkbox-box.is-checked {
+  background-color: #ffffff;
+  border-color: #ffffff;
+  color: var(--primary);
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-main);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}

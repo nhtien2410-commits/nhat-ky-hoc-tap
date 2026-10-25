@@ -1,0 +1,36 @@
+{
+  "rules": {
+    "users": {
+      "$uid": {
+        ".read": "auth != null && auth.uid === $uid",
+        ".write": "auth != null && auth.uid === $uid"
+      }
+    },
+    "groups": {
+      ".read": "auth != null",
+      "$groupId": {
+        ".write": "auth != null && (!data.exists() || data.child('ownerId').val() === auth.uid || root.child('groups').child($groupId).child('members').child(auth.uid).exists())",
+        "name": {
+          ".validate": "newData.isString() && newData.val().length <= 200"
+        },
+        "description": {
+          ".validate": "newData.isString() && newData.val().length <= 1000"
+        }
+      }
+    },
+    "tasks": {
+      ".read": "auth != null",
+      "$groupId": {
+        ".write": "auth != null",
+        "$taskId": {
+          "title": {
+            ".validate": "newData.isString() && newData.val().length <= 200"
+          },
+          "description": {
+            ".validate": "newData.isString() && newData.val().length <= 1000"
+          }
+        }
+      }
+    }
+  }
+}

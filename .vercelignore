@@ -1,0 +1,11 @@
+node_modules
+three.js-master.zip
+three.js-master
+.git
+.agents
+.vercel
+dist
+*.zip
+*.rar
+*.tar.gz
+scratch_*.cjs

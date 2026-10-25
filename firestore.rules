@@ -1,0 +1,58 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    function isGroupMember(groupId) {
+      return isAuthenticated() && (
+        request.auth.uid in get(/databases/$(database)/documents/groups/$(groupId)).data.members
+      );
+    }
+
+    // Part 1: Diary logs remain 100% private to each user
+    match /users/{userId}/studyTracker/{document=**} {
+      allow read, write: if isOwner(userId);
+    }
+
+    // Part 2: Groups & Collaborative Task Management
+    match /groups/{groupId} {
+      // Group members can read group details
+      allow read: if isAuthenticated();
+      // Authenticated users can create groups; only owner can update/delete
+      allow create: if isAuthenticated() && request.resource.data.ownerId == request.auth.uid;
+      allow update: if isAuthenticated();
+      allow delete: if isAuthenticated() && resource.data.ownerId == request.auth.uid;
+
+      // Group Tasks
+      match /tasks/{taskId} {
+        allow read: if isAuthenticated();
+        // Creation & editing: validated length limits
+        allow create, update: if isAuthenticated()
+          && request.resource.data.title.size() <= 200
+          && (!('description' in request.resource.data) || request.resource.data.description.size() <= 1000);
+        allow delete: if isAuthenticated();
+
+        // Task Comments
+        match /comments/{commentId} {
+          allow read: if isAuthenticated();
+          allow create: if isAuthenticated() && request.resource.data.content.size() <= 1000;
+          allow delete: if isAuthenticated() && resource.data.userId == request.auth.uid;
+        }
+      }
+    }
+
+    // Notifications
+    match /notifications/{notificationId} {
+      allow read, update, delete: if isAuthenticated() && resource.data.userId == request.auth.uid;
+      allow create: if isAuthenticated();
+    }
+  }
+}
