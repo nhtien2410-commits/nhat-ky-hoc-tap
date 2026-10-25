@@ -1,10 +1,10 @@
 import React from 'react';
-import { Check, Sparkles } from 'lucide-react';
+import { Check, Sparkles, Lightbulb, Languages, BookOpen } from 'lucide-react';
 
 const STUDY_ITEMS = [
-  { key: 'knowledge', label: 'Kiến thức mới', icon: '💡' },
-  { key: 'english', label: 'Học Tiếng Anh', icon: '🇬🇧' },
-  { key: 'reading', label: 'Đọc sách', icon: '📖' },
+  { key: 'knowledge', label: 'Kiến thức mới', icon: Lightbulb, color: '#f59e0b' },
+  { key: 'english', label: 'Học Tiếng Anh', icon: Languages, color: '#3b82f6' },
+  { key: 'reading', label: 'Đọc sách', icon: BookOpen, color: '#8b5cf6' },
 ];
 
 function DayCell({ 
@@ -99,6 +99,7 @@ function DayCell({
       <div className="cell-items-list">
         {STUDY_ITEMS.map((item) => {
           const isChecked = !!record[item.key];
+          const IconComp = item.icon;
           return (
             <div 
               key={item.key} 
@@ -118,7 +119,9 @@ function DayCell({
               <span className={`checkbox-box ${isChecked ? 'is-checked pop-active' : ''}`}>
                 {isChecked && <Check size={13} strokeWidth={3} />}
               </span>
-              <span className="item-icon">{item.icon}</span>
+              <span className="item-icon">
+                <IconComp size={12} color={item.color} />
+              </span>
               <span className="item-label">{item.label}</span>
             </div>
           );

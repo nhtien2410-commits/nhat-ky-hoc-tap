@@ -517,18 +517,18 @@
 .cell-items-list {
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
+  gap: 0.32rem;
 }
 
 .cell-item {
   display: flex;
   align-items: center;
-  gap: 0.25rem;
+  gap: 0.35rem;
   font-size: 0.72rem;
   font-weight: 500;
   color: var(--text-secondary);
   border-radius: 4px;
-  padding: 0.08rem 0.12rem;
+  padding: 0.1rem 0.15rem;
   transition: background-color var(--transition-fast);
 }
 
@@ -537,9 +537,15 @@
 }
 
 .item-icon {
+  width: 16px;
+  height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font-size: 0.75rem;
   line-height: 1;
   flex-shrink: 0;
+  text-align: center;
 }
 
 .item-label {
